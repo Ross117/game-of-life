@@ -6,11 +6,7 @@ class Board extends Component {
     super(props);
 
     this.state = {
-<<<<<<< HEAD
-      "board": [1, 2, 3, 4, 5, 6, 7]
-=======
       "board": [1, 2, 3, 4, 5, 6, 7, 8, 9]
->>>>>>> dev
     };
   }
 
