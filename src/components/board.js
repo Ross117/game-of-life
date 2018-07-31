@@ -1,31 +1,43 @@
 import React, { Component } from 'react';
-import Square from './square';
+import Row from './row';
+// const math = require('mathjs');
+
+var generateBoard = (rowCount, squareCount) => {
+  let board = [];
+  for (let i =0; i< rowCount; i++){
+    let newRow = {};
+    for (let j = 0; j < squareCount; j++){
+      newRow[j] = false;
+    }
+    board.push(newRow);
+  }
+  return board;
+}
 
 class Board extends Component {
   constructor(props) {
     super(props);
-
+    this.rowCount = 3;
+    this.squareCount = 3;
     this.state = {
-      "board": [1, 2, 3, 4, 5, 6, 7]
+      "board": generateBoard(this.rowCount, this.squareCount)
     };
   }
 
-  // put in component did mount event?
-  // createStateArray() {
-  //   this.setState({board: [1, 2, 3, 4, 5, 6, 7, 8, 9]});
-  // }
-
-  renderSquares() {
-    return this.state.board.map( (val) => {
-      return <Square />;
-    });
-  }
-
   render() {
+    let rows = [];
+    let rowContainer = <div>{rows}</div>
+    for (let i =0; i < this.rowCount; i++) {
+      rows.push(
+        <div className='row'>
+        <Row key={i} row={i}  squareCount={this.squareCount}/>
+        </div>
+      );
+    }
     return (
-      <div>
-        {this.renderSquares()}
-      </div>
+       <div>
+         {rowContainer}
+       </div>
     );
   }
 }
