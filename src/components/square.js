@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 // child component of board
 const Square = () => {

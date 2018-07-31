@@ -6,18 +6,37 @@ class Board extends Component {
     super(props);
 
     this.state = {
-      "board": [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      'board': this.createMatrix(3, 3)
     };
   }
 
-  // put in component did mount event?
-  // createStateArray() {
-  //   this.setState({board: [1, 2, 3, 4, 5, 6, 7, 8, 9]});
-  // }
+  // put in component did mount event? Which is the best place?
+  createMatrix(r, c) {
+    const randomInt = () => { return Math.round(Math.random()); };
+    let matrix = [];
+
+    for (let i = 1; i <= r; i++) {
+      let row = [];
+      for (let j = 1; j <= c; j++) {
+        row.push(Boolean(randomInt()));
+      }
+      matrix.push(row);
+    }
+    return matrix;
+  }
 
   renderSquares() {
+    const detectAdjNode = (board) => {
+      board.forEach( (val, ind) => {
+        
+      });
+    };
+
+    // why does this not work with forEach?
     return this.state.board.map( (val) => {
-      return <Square />;
+      return val.map( () => {
+        return <Square />;
+      });
     });
   }
 
