@@ -22,17 +22,50 @@ class Board extends Component {
       }
       matrix.push(row);
     }
+    console.log(matrix);
     return matrix;
   }
 
-  renderSquares() {
-    const detectAdjNode = (board) => {
-      board.forEach( (val, ind) => {
-        
+
+  updateBoard() {
+
+    const board = this.state.board;
+
+    const getNeighbours = (r, c) => {
+      // returns an array of the given node's neighbours;
+      let neighbours = [];
+
+      board.forEach( (rowArr, rowInd) => {
+        rowArr.forEach( (ele, colInd) => {
+          // make sure node doesn't find itself
+          if (!(r === rowInd && c === colInd) &&
+            (r === rowInd || r === rowInd - 1 || r === rowInd + 1) &&
+            (c === colInd || c === colInd - 1 || c === colInd + 1)) {
+            neighbours.push(ele);
+          }
+        });
       });
+
+      return neighbours;
     };
 
-    // why does this not work with forEach?
+    const updatedBoard = board.map( (rowArr, rowInd) => {
+      return rowArr.map( (ele, colInd) => {
+        const neighbours = getNeighbours(rowInd, colInd);
+        console.log([rowInd, colInd, neighbours]);
+        // return ele with val true or false depending on neighbours
+        // if (true) return true;
+        // else return false;
+      });
+    });
+
+    // board.setState({board: updatedBoard});
+
+  }
+
+  renderSquares() {
+    // test
+    this.updateBoard();
     return this.state.board.map( (val) => {
       return val.map( () => {
         return <Square />;
