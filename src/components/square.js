@@ -1,12 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react'
+import { css } from 'emotion'
 
-// child component of board
-const Square = () => {
+const squareStyle = css`
+  width: 98px;
+  height: 98px;
+  border: 1px solid black;
+  float: left;
+`
+
+const Square = ({ first, second, active }) => {
+  const style = {
+    backgroundColor: active? "green" : "white"
+  }
   return (
-    <input type="button" className="square"/>
+    <input 
+      type="button"
+      style={style}
+      className={squareStyle} 
+      value={`${first},${second}`}/>
   );
-
-//   define onclick event which updates board/square state?
 };
 
 export default Square;
