@@ -4,8 +4,8 @@ import shortid from 'shortid'
 import Square from './Square'
 
 const boardStyle = css`
-  width: calc(400px - 8px);
-  height: calc(400px - 8px);
+  width: calc(600px - 12px);
+  height: calc(600px - 12px);
   margin: auto;
   border: 2px solid black;
 `
