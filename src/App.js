@@ -1,28 +1,35 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import Board from './components/Board'
-import { activeNodesAdjacent } from './utils/matrix'
 
 class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      matrix: [
-        [false, true, false, false],
-        [false, true, false, false],
-        [false, true, true, false],
-        [false, true, false, false],
-      ]
+      "initialMatrix": this.createMatrix(10, 10)
     }
   }
+
+  createMatrix(numberOfRows, numberOfColumns) {
+    const randomInt = () => { return Math.round(Math.random()); }
+    let matrix = []
+
+    for (let i = 1; i <= numberOfRows; i++) {
+      let row = []
+      for (let j = 1; j <= numberOfColumns; j++) {
+        row.push(Boolean(randomInt()))
+      }
+      matrix.push(row)
+    }
+
+    return matrix
+  }
+
   render() {
-    const [coordinateX, coordinateY] = [2,1]
-    const matrix = this.state.matrix
-    console.log(activeNodesAdjacent([3, 0], matrix))
     return (
-      <Fragment>
-        <Board matrix={matrix}/>
-      </Fragment>
-    );
+      <div className="board">
+        <Board initialMatrix={this.state.initialMatrix} />
+      </div>
+    )
   }
 }
 
