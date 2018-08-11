@@ -5,15 +5,6 @@ const nodeActive = (coordinates, matrix) => {
   return matrix[xCoordinate] && matrix[xCoordinate][yCoordinate] ? matrix[xCoordinate][yCoordinate] : false
 }
 
-const findActiveNodes = (matrix) => {
-  const activeNodeCollection = []
-  matrix.map((horizontalArray, xAxis) =>
-    horizontalArray.map((elementActive, yAxis) => {
-      if (elementActive) activeNodeCollection.push([xAxis, yAxis])
-    }))
-  return activeNodeCollection
-}
-
 const adjacentCoordinates = (node) => {
   const [xNode, yNode] = node
  
@@ -35,7 +26,7 @@ const adjacentCoordinates = (node) => {
  }
 
 const activeNodesAdjacent = (node, matrix) => {
-return adjacentCoordinates(node).map(i => nodeActive(i, matrix));
+  return adjacentCoordinates(node).map(i => nodeActive(i, matrix));
 }
 
 export {
@@ -43,5 +34,4 @@ export {
   adjacentCoordinates,
   aliveOrDead,
   nodeActive,
-  findActiveNodes,
 }

@@ -10,9 +10,7 @@ const boardStyle = css`
   border: 2px solid black;
 `
 
-const containSameElements = (array, match) => {
-  return array.map((x, i) => match[i] === x ).every(x => x === true)
-}
+
 
 class Board extends Component {
   constructor(props) {
