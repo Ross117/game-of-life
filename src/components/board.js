@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Row from './row';
+import Row from './Row';
 // const math = require('mathjs');
 
 var generateBoard = (rowCount, squareCount) => {

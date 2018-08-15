@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Square from './square';
+import Square from './Square';
 
 const Row = (props) => {
     let rowArry = [];
