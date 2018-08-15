@@ -8,7 +8,7 @@ const squareStyle = css`
   float: left;
 `
 
-const Square = ({ first, second, active }) => {
+const Square = ({ active }) => {
   const style = {
     backgroundColor: active? "green" : "white"
   }
@@ -16,8 +16,7 @@ const Square = ({ first, second, active }) => {
     <input 
       type="button"
       style={style}
-      className={squareStyle} 
-      value={`${first},${second}`}/>
+      className={squareStyle} />
   );
 };
 
