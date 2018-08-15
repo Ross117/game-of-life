@@ -2,31 +2,29 @@ import React, { Component } from 'react';
 import Row from './Row';
 // const math = require('mathjs');
 
-var generateBoard = (rowCount, squareCount) => {
-  let board = [];
-  for (let i =0; i< rowCount; i++){
-    let newRow = [];
-    for (let j = 0; j < squareCount; j++){
-      if(i === 1 && j ===1){
-        newRow[j] = true;
-      }else{
-      newRow[j] = false;
-    }}
-    board.push(newRow);
-  }
-  console.log('generate board', board)
-  console.log('1,1', board[1][1] )
-  return board;
-}
-
 class Board extends Component {
   constructor(props) {
     super(props);
     this.rowCount = 4;
     this.squareCount = 4;
     this.state = {
-      "board": generateBoard(this.rowCount, this.squareCount)
+      "board": this.createMatrix(this.rowCount, this.squareCount)
     };
+  }
+
+  createMatrix(r, c) {
+      const randomInt = () => { return Math.round(Math.random()); };
+      let matrix = [];
+
+      for (let i = 1; i <= r; i++) {
+        let row = [];
+        for (let j = 1; j <= c; j++) {
+          row.push(Boolean(randomInt()));
+        }
+        matrix.push(row);
+      }
+      console.log(matrix);
+      return matrix;
   }
 
   checkLife(){
