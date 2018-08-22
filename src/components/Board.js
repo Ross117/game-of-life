@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { css } from 'emotion'
 import shortid from 'shortid'
@@ -23,7 +24,7 @@ class Board extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      "board": this.props.matrix,
+      "board": this.props.initialMatrix,
     };
     this.renderMatrix = this.renderMatrix.bind(this)
     this.interval = this.interval.bind(this)
@@ -46,11 +47,43 @@ class Board extends Component {
   componentDidMount(){
     this.intervalId = setInterval(this.interval, 2000)
   }
+
+  checkLife(){
+    for (let i = 0; i =< this.rowCount; i++){
+      for (let j = 0; j =< this.squareCount; j++){
+        if (j){
+          j = this.countNeighbors(i, j)
+        }
+      }
+    }
+  }
+
+  countNeighbors(row, square){
+  var cell = this.state.board[row][square];
+  neighbors = [
+             [-1,-1], [-1,0], [-1,1],
+             [0,-1],          [0,1],
+             [1,-1],  [1,0],  [1,1]
+            ]
+  neighborsTop = this.state.board[row-1 =< this.rowCount ? row-1 : this.rowCount + 1].slice(square -1 )
+}
+
+
+checkLife(){
+  for (let i = 0; i =< this.rowCount; i++){
+    for (let j = 0; j =< this.squareCount; j++){
+      if (j){
+        j = this.countNeighbors(i, j)
+      }
+    }
+  }
+}
   render() {
     return (
       <div className={boardStyle}>
         { this.renderMatrix() }
       </div>
+
     );
   }
 }

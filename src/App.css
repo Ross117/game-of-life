@@ -1,0 +1,15 @@
+/* * {
+  box-sizing: border-box;
+} */
+
+
+
+.row{
+  display: inline-block;
+}
+.square {
+  width: 98px;
+  height: 98px;
+  border: 1px solid black;
+  /* float: left; */
+}
