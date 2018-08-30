@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { css } from 'emotion'
 import shortid from 'shortid'
-import { activeNodesAdjacent, aliveOrDead } from '../utils/matrix'
 import Square from './Square'
 
 const boardStyle = css`
@@ -12,13 +11,7 @@ const boardStyle = css`
   border: 2px solid black;
 `
 
-const nextGeneration = ( board ) => {
-  return board.map((horizontalArray, xCoordinate) => {
-    return horizontalArray.map((_, yCoordinate) => {
-      return aliveOrDead(activeNodesAdjacent([xCoordinate, yCoordinate], board))
-    })
-  })
-}
+
 
 class Board extends Component {
   constructor(props) {
@@ -28,6 +21,8 @@ class Board extends Component {
     };
     this.renderMatrix = this.renderMatrix.bind(this)
     this.interval = this.interval.bind(this)
+    this.nextGeneration = this.nextGeneration.bind(this)
+    this.activeNodesAdjacent = this.activeNodesAdjacent.bind(this)
   }
 
   renderMatrix(){
@@ -40,44 +35,34 @@ class Board extends Component {
       })
     })
   }
+
   interval(){
-    const nextBoard = nextGeneration(this.state.board)
+    const nextBoard = this.nextGeneration(this.state.board)
     this.setState({ board: nextBoard })
   }
+  
   componentDidMount(){
     this.intervalId = setInterval(this.interval, 2000)
   }
 
-  checkLife(){
-    for (let i = 0; i =< this.rowCount; i++){
-      for (let j = 0; j =< this.squareCount; j++){
-        if (j){
-          j = this.countNeighbors(i, j)
-        }
-      }
-    }
+  nextGeneration(){
+    console.log('Ross is still great')
+    return this.state.board.map((horizontalArray, xCoordinate) => {
+      return horizontalArray.map((_, yCoordinate) => {
+        return aliveOrDead(activeNodesAdjacent([xCoordinate, yCoordinate]))
+      })
+    })
   }
 
-  countNeighbors(row, square){
-  var cell = this.state.board[row][square];
-  neighbors = [
-             [-1,-1], [-1,0], [-1,1],
-             [0,-1],          [0,1],
-             [1,-1],  [1,0],  [1,1]
-            ]
-  neighborsTop = this.state.board[row-1 =< this.rowCount ? row-1 : this.rowCount + 1].slice(square -1 )
-}
-
-
-checkLife(){
-  for (let i = 0; i =< this.rowCount; i++){
-    for (let j = 0; j =< this.squareCount; j++){
-      if (j){
-        j = this.countNeighbors(i, j)
-      }
-    }
+  activeNodesAdjacent(node){
+    return adjacentCoordinates(node).map(i => nodeActive(i));
   }
-}
+
+  nodeActive(coordinates){
+    const [xCoordinate, yCoordinate] = coordinates
+    return this.state.board[xCoordinate] && this.state.board[xCoordinate][yCoordinate] ? this.state.board[xCoordinate][yCoordinate] : false
+  }
+
   render() {
     return (
       <div className={boardStyle}>
@@ -115,8 +100,6 @@ const adjacentCoordinates = (node) => {
  return absoluteCoordinates.filter(i => i)
  }
 
-const activeNodesAdjacent = (node, matrix) => {
-  return adjacentCoordinates(node).map(i => nodeActive(i, matrix));
-}
+
 
 export default Board;

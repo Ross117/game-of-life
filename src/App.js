@@ -20,7 +20,7 @@ class App extends Component {
       }
       matrix.push(row)
     }
-
+ console.log('matrix', matrix)
     return matrix
   }
 
