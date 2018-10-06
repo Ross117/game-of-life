@@ -1,40 +1,28 @@
-import { arraysIdentical, flatten } from './arrays'
-
+98
 const aliveOrDead = (neighbours) => { return !(neighbours < 2) && !(neighbours > 3)}
 
-const nodeActive = (node, matrix) => {
-  const [coordX, coordY] = node
-  return matrix[coordX] && matrix[coordX][coordY] ? matrix[coordX][coordY] : false
-}
+const nodeActive = (node) => {
+ 
+  const [xNode, yNode] = node;
 
-const adjacentCoordinates = (node) => {
-  const [coordX, coordY] = node
-  const adjacentNodeCombinations = [
-    [[NaN, NaN], [NaN, NaN], [NaN, NaN],],
-    [[NaN, NaN], [NaN, NaN], [NaN, NaN],],
-    [[NaN, NaN], [NaN, NaN], [NaN, NaN],],
-  ]
-    .map((horizontalArray, axisX) => {
-      return horizontalArray.map((_, axisY) => {
-        const adjacentCoordX = coordX + axisX - 1
-        const adjacentCoordY = coordY + axisY - 1
-        const centralCoordinate = adjacentCoordX === coordX && adjacentCoordY === coordY 
-        return centralCoordinate
-          ? [false, false]
-          : [adjacentCoordX, adjacentCoordY]
-      })
-    })
-  return adjacentNodeCombinations
-}
+  const adjacentNodesOffsets = [
+    [-1, -1], [-1, 0], [-1, 1],
+     [0, -1],          [0, 1],
+      [1,-1], [1,0],   [1,1]
+  ];
+ 
+  const appplyOffsets = adjacentNodesOffsets.map(offSet =>{
+    let [x,y] = offSet;
+   let xAbsolute = x + xNode;
+   let yAbsolute = y + yNode ;
+   return xAbsolute >= 0 && yAbsolute >= 0 ? [xAbsolute, yAbsolute] : false;
+   })
+ 
+  return appplyOffsets.filter(i => i)
+  }
 
 const activeNodesAdjacent = (node, matrix) => {
-  const activeNodeMatrix = adjacentCoordinates(node).map((horizontalArray) => {
-    return horizontalArray
-      .map((node) => {
-        return nodeActive(node, matrix)
-      })
-  })
-  return flatten(activeNodeMatrix).filter(x => x).length
+  return adjacentCoordinates(node).map(i => nodeActive(i, matrix));
 }
 
 export {
