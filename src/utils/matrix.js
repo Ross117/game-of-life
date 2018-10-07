@@ -1,33 +1,37 @@
-98
 const aliveOrDead = (neighbours) => { return !(neighbours < 2) && !(neighbours > 3)}
 
-const nodeActive = (node) => {
+const activeNodesAdjacent = (squareCoordinate, matrix) => {debugger
+  return validAdjacentNodes(squareCoordinate)
+          .map(adjacentNodeCoorinate => {
+            const [x, y] = adjacentNodeCoorinate;
+            return matrix[x][y]
+          })
+          .filter(i => i);
+}
+
+const validAdjacentNodes = (node) => {
  
   const [xNode, yNode] = node;
 
-  const adjacentNodesOffsets = [
-    [-1, -1], [-1, 0], [-1, 1],
-     [0, -1],          [0, 1],
-      [1,-1], [1,0],   [1,1]
+  const nodeOffsets = [
+    [-1, -1], [0,-1], [1,-1],
+     [-1, 0],          [1, 0],
+      [-1, 1], [0,1],   [1, 1]
   ];
  
-  const appplyOffsets = adjacentNodesOffsets.map(offSet =>{
+  const applyOffsets = nodeOffsets.map(offSet =>{
     let [x,y] = offSet;
    let xAbsolute = x + xNode;
-   let yAbsolute = y + yNode ;
+   let yAbsolute = y + yNode;
    return xAbsolute >= 0 && yAbsolute >= 0 ? [xAbsolute, yAbsolute] : false;
    })
  
-  return appplyOffsets.filter(i => i)
+  return applyOffsets.filter(i => i)
   }
 
-const activeNodesAdjacent = (node, matrix) => {
-  return adjacentCoordinates(node).map(i => nodeActive(i, matrix));
-}
 
 export {
   activeNodesAdjacent,
-  adjacentCoordinates,
   aliveOrDead,
-  nodeActive,
+  validAdjacentNodes,
 }
