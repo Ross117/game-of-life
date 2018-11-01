@@ -1,6 +1,6 @@
 const aliveOrDead = (neighbours) => { return !(neighbours < 2) && !(neighbours > 3)}
 
-const activeNodesAdjacent = (squareCoordinate, matrix) => {
+const activeNodesAdjacent = (squareCoordinate, matrix) => {debugger
   return validAdjacentNodes(squareCoordinate, matrix)
           .map(adjacentNodeCoorinate => {
             const [x, y] = adjacentNodeCoorinate;
@@ -24,7 +24,7 @@ const validAdjacentNodes = (node, matrix) => {
     let [x,y] = offSet;
    let xAbsolute = x + xNode;
    let yAbsolute = y + yNode;
-   return xAbsolute >= 0 && xAbsolute < length-1 && yAbsolute >= 0 && yAbsolute < length-1 ? [xAbsolute, yAbsolute] : false;
+   return xAbsolute >= 0 && xAbsolute < length && yAbsolute >= 0 && yAbsolute < length ? [xAbsolute, yAbsolute] : false;
    })
  
   return applyOffsets.filter(i => i)
