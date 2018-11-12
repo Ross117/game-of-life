@@ -8,8 +8,7 @@ const createMatrix = (rows, cols) => {
 
     const matrix = Array(rows)
       .fill(Array(cols)
-      // need to create a placeholder 3rd dimension of the array, so that the 2nd dimension is mappable and not just empty slots
-      .fill(Array(1)))
+      .fill(0))
       .map( (r) => {
         return r.map( () => {
           return Boolean(randomInt());
